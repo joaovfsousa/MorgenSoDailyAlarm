@@ -1,0 +1,23 @@
+---
+useDotenv: true
+
+service: scheduleFromMorgenOnAlexa
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  scheduleFromMorgenOnAlexa:
+    handler: handler.run
+    events:
+      - schedule: cron(0 20 * * * *)
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+
+custom:
+  serverlessPluginTypescript:
+    tsConfigFileLocation: "./tsconfig.json"
